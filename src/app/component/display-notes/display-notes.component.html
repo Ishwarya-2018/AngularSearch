@@ -1,0 +1,33 @@
+<div>
+        <div>
+                <mat-card fxLayoutAlign="center center" class="searchInput">
+                  <button mat-icon-button class="searchButton">
+                    <mat-icon>search</mat-icon>
+                  </button>
+                  <input mat-input class="searchInput"  [(ngModel)]="searchContent" (keyup)="onKey()" style="width: 600px;height:20px"
+                    placeholder="Search">
+                  <button *ngIf="searchContent!=undefined" mat-icon-button class="search" (click)="searchc()">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </mat-card>
+              </div>
+      
+                <div class="notes-div" fxLayout = {{direction}} *ngFor="let note of notes  | noteSearchPipe:searchContent">
+                        <mat-card class="note-mat-card" 
+                                [ngStyle]="{'background-color':note.color}">
+                                <div (click)="openDialog(note)" class="notes">
+                                        <div fxLayout="row">
+                                        <input class="title-text" type="text" routerLink='/search' [(ngModel)]="note.noteTitle"
+                                                [ngStyle]="{'background-color':note.color}" disabled />      
+                                        </div>       
+                                        <textarea (click)="openDialog(note)" [(ngModel)]="note.description"
+                                                cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                                                cdkAutosizeMinRows="1" cdkAutosizeMaxRows="auto"
+                                                [ngStyle]="{'background-color':note.color}" disabled></textarea>
+                                </div>           
+                                <div class="note-toolbar">
+                                </div>
+                        </mat-card>
+                </div>
+        
+</div>
